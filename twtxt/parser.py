@@ -21,12 +21,12 @@ logger = logging.getLogger(__name__)
 
 def make_aware(dt):
     """Appends tzinfo and assumes UTC, if datetime object has no tzinfo already."""
-    return dt if dt.tzinfo else dt.replace(tzinfo=timezone.utc)
+    pass
 
 
 def parse_iso8601(string):
     """Parse string using dateutil.parser."""
-    return make_aware(dateutil.parser.parse(string))
+    pass
 
 
 def parse_tweets(raw_tweets, source, now=None):
@@ -41,19 +41,7 @@ def parse_tweets(raw_tweets, source, now=None):
         :returns: a list of parsed tweets :class:`Tweet` objects
         :rtype: list
     """
-    if now is None:
-        now = datetime.now(timezone.utc)
-
-    tweets = []
-    for line in raw_tweets:
-        try:
-            tweet = parse_tweet(line, source, now)
-        except (ValueError, OverflowError) as e:
-            logger.debug("{0} - {1}".format(source.url, e))
-        else:
-            tweets.append(tweet)
-
-    return tweets
+    pass
 
 
 def parse_tweet(raw_tweet, source, now=None):
@@ -68,13 +56,4 @@ def parse_tweet(raw_tweet, source, now=None):
         :returns: the parsed tweet
         :rtype: Tweet
     """
-    if now is None:
-        now = datetime.now(timezone.utc)
-
-    raw_created_at, text = raw_tweet.split("\t", 1)
-    created_at = parse_iso8601(raw_created_at)
-
-    if created_at > now:
-        raise ValueError("Tweet is from the future")
-
-    return Tweet(click.unstyle(text.strip()), created_at, source)
+    pass

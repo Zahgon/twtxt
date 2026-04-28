@@ -40,8 +40,7 @@ class Tweet:
 
     @staticmethod
     def _is_valid_operand(other):
-        return (hasattr(other, "text") and
-                hasattr(other, "created_at"))
+        pass
 
     def __lt__(self, other):
         if not self._is_valid_operand(other):
@@ -74,18 +73,12 @@ class Tweet:
     @property
     def relative_datetime(self):
         """Return human-readable relative time string."""
-        now = datetime.now(timezone.utc)
-        created_at = self.created_at.astimezone(timezone.utc)
-
-        delta = humanize.naturaldelta(abs(created_at - now))
-        tense = "from now" if now < created_at else "ago"
-
-        return f"{delta} {tense}"
+        pass
 
     @property
     def absolute_datetime(self):
         """Return human-readable absolute time string."""
-        return self.created_at.strftime("%a, %d %b %Y %H:%M:%S")
+        pass
 
 
 class Source:

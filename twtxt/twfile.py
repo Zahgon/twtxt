@@ -16,21 +16,8 @@ logger = logging.getLogger(__name__)
 
 
 def get_local_tweets(source, limit):
-    try:
-        with open(source.file, "r") as fh:
-            input_lines = fh.readlines()
-    except (FileNotFoundError, PermissionError) as e:
-        logger.debug(e)
-        return []
-    local_tweets = parse_tweets(input_lines, source)
-    return sorted(local_tweets, reverse=True)[:limit]
+    pass
 
 
 def add_local_tweet(tweet, file):
-    try:
-        with open(file, "a") as fh:
-            fh.write("{0}\n".format(str(tweet)))
-    except (FileNotFoundError, PermissionError) as e:
-        logger.debug(e)
-        return False
-    return True
+    pass

@@ -17,18 +17,11 @@ short_mention_re = re.compile(r'@(?P<name>\w+)')
 
 
 def get_source_by_url(url):
-    conf = click.get_current_context().obj["conf"]
-    if url == conf.twturl:
-        return conf.source
-    return next((source for source in conf.following if url == source.url), None)
+    pass
 
 
 def get_source_by_name(nick):
-    nick = nick.lower()
-    conf = click.get_current_context().obj["conf"]
-    if nick == conf.nick and conf.twturl:
-        return conf.source
-    return next((source for source in conf.following if nick == source.nick), None)
+    pass
 
 
 def expand_mentions(text, embed_names=True):
@@ -37,33 +30,11 @@ def expand_mentions(text, embed_names=True):
     For example:
     "@source.nick" will be expanded to "@<source.nick source.url>".
     """
-    if embed_names:
-        mention_format = "@<{name} {url}>"
-    else:
-        mention_format = "@<{url}>"
-
-    def handle_mention(match):
-        source = get_source_by_name(match.group(1))
-        if source is None:
-            return "@{0}".format(match.group(1))
-        return mention_format.format(
-            name=source.nick,
-            url=source.url)
-
-    return short_mention_re.sub(handle_mention, text)
+    pass
 
 
 def format_mention(name, url):
-    source = get_source_by_url(url)
-    if source:
-        if source.nick == click.get_current_context().obj["conf"].nick:
-            return click.style("@{0}".format(source.nick), fg="magenta", bold=True)
-        else:
-            return click.style("@{0}".format(source.nick), bold=True)
-    elif name:
-        return "@{0}".format(name)
-    else:
-        return "@<{0}>".format(url)
+    pass
 
 
 def format_mentions(text, format_callback=format_mention):
@@ -77,9 +48,4 @@ def format_mentions(text, format_callback=format_mention):
     If nothing from the above is true: nick will be unstyled
     If nothing from the above is true and nick is not given: url will be used
     """
-
-    def handle_mention(match):
-        name, url = match.groups()
-        return format_callback(name, url)
-
-    return mention_re.sub(handle_mention, text)
+    pass
